@@ -1,0 +1,167 @@
+/* Monochrome grayscale theme */
+:root {
+  --bg: #0f1011;
+  --bg-elev: #151618;
+  --bg-elev-2: #1b1d20;
+  --text: #e6e7e8;
+  --text-dim: #a9acb0;
+  --border: #2a2d31;
+  --accent: #d0d3d6;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+html { color-scheme: dark; }
+body {
+  margin: 0;
+  background: linear-gradient(180deg, var(--bg), #0c0d0e 60%);
+  color: var(--text);
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, Apple Color Emoji, Segoe UI Emoji;
+}
+
+/* Layout */
+.page {
+  display: grid;
+  grid-template-columns: 1fr;
+  min-height: 100dvh;
+}
+
+@media (min-width: 1024px) {
+  .page { grid-template-columns: minmax(0, 1fr) 340px; }
+}
+
+.chat {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100dvh;
+  border-right: 1px solid var(--border);
+}
+
+.chat__header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 56px;
+  padding: 0 16px;
+  background: color-mix(in oklab, var(--bg), black 6%);
+  border-bottom: 1px solid var(--border);
+  backdrop-filter: saturate(120%) blur(6px);
+}
+
+.chat__brand { font-weight: 600; letter-spacing: 0.2px; color: var(--accent); }
+
+.chat__messages {
+  padding: 16px;
+  overflow: auto;
+  display: grid;
+  gap: 12px;
+  align-content: start;
+}
+
+.bubble {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 8px 12px;
+  align-items: start;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  max-width: min(780px, 96%);
+}
+
+.bubble--user { margin-left: auto; background: var(--bg-elev-2); }
+.bubble--assistant { margin-right: auto; }
+
+.bubble__role {
+  grid-column: 1 / 2;
+  font-size: 12px;
+  color: var(--text-dim);
+  padding-top: 2px;
+}
+
+.bubble__content { grid-column: 1 / -1; margin: 0; line-height: 1.6; }
+.bubble__content--muted { color: var(--text-dim); }
+
+/* Composer */
+.composer {
+  position: sticky;
+  bottom: 0;
+  padding: 12px 16px;
+  background: linear-gradient(180deg, transparent, color-mix(in oklab, var(--bg), black 8%) 30%);
+}
+
+.composer__field {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  background: var(--bg-elev);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 8px;
+}
+
+.composer__textarea {
+  resize: none;
+  min-height: 24px;
+  max-height: 180px;
+  background: transparent;
+  color: var(--text);
+  border: none;
+  outline: none;
+  padding: 8px 10px;
+  font-size: 14px;
+}
+
+.composer__send {
+  appearance: none;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 14px;
+  background: color-mix(in oklab, var(--bg-elev), white 2%);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.composer__send:disabled { opacity: 0.5; cursor: default; }
+
+.composer__hint { margin-top: 8px; font-size: 12px; color: var(--text-dim); text-align: center; }
+
+/* Tools panel */
+.tools {
+  display: none;
+  min-height: 100dvh;
+  background: color-mix(in oklab, var(--bg), black 4%);
+}
+
+@media (min-width: 1024px) {
+  .tools { display: grid; grid-template-rows: auto 1fr; }
+}
+
+.tools__header {
+  height: 56px;
+  display: flex;
+  align-items: center;
+  padding: 0 16px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text-dim);
+}
+
+.tools__list {
+  padding: 16px;
+  display: grid;
+  gap: 12px;
+}
+
+.toolcard {
+  border: 1px dashed var(--border);
+  border-radius: 12px;
+  padding: 12px;
+  background: color-mix(in oklab, var(--bg-elev), white 1%);
+}
+
+.toolcard__title { font-weight: 600; margin-bottom: 4px; color: var(--accent); }
+.toolcard__desc { color: var(--text-dim); font-size: 13px; }
